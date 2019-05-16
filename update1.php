@@ -16,6 +16,6 @@ $query=mysqli_query($koneksi,"UPDATE prosesbayar SET nomor_pc='$nomor_pc', nama_
 if ($query) {
 header('location:DataTransaksi.php');
 }else{
-echo "Gagal menyimpan data";
+echo "<center><h1 style='color:red'>Gagal menyimpan Data !</h1></center>";
 }
 ?>
