@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
 </head>
@@ -29,8 +30,46 @@
 </nav>
 </body>   
 <div class="container">
-  <div class="jumbotron" style="margin: 0px;background: #8abce6;padding-top: 0px;">
+  <div class="jumbotron" style="margin: 0px;background-color: rgba(245, 245, 245, 0.4);padding-top: 0px;">
   <hr style="border: 0px solid #fff">
+  <?php 
+		if(isset($_GET['pesan'])){
+			$pesan = $_GET['pesan'];
+    if($pesan == 'berhasil'){
+    	?>
+    	<div class="alert alert-success" role="alert">
+		  <b>Data Berhasil di Masukkan</b>
+		</div><?php 
+		    }
+		    else if($pesan == 'update'){
+		    	?>
+		    	<div class="alert alert-success" role="alert">
+		  <b>Data Berhasil di Update</b>
+		</div>
+		    	<?php
+		    }
+		    else if($pesan == 'hapus'){
+		    	?>
+		    	<div class="alert alert-danger" role="alert">
+		  <b>Data Berhasil di hapus</b>
+		</div>
+		    	<?php
+		    }else if($pesan == 'gagal'){
+		    	?>
+		    	<div class="alert alert-danger" role="alert">
+		  <b>Data sedang digunakan, tidak bisa mengubah nama</b>
+		</div>
+		    	<?php
+		    }else if($pesan == 'gagalhapus'){
+		    	?>
+		    	<div class="alert alert-danger" role="alert">
+		  <b>Data sedang digunakan, tidak bisa dihapus</b>
+		</div>
+		    	<?php
+		    }
+
+		}
+		    ?>
   <h1 style="font-family: fantasy;
     text-transform: uppercase;
     -webkit-text-stroke: 2px #ffffff;">Data Karyawan</h1>
@@ -42,10 +81,11 @@
 	<table id="mytable" class="table table-bordred table-striped">
 		 <thead>
 		<tr >
-			<th >ID Karyawan</th>
-			<th >Jadwal Shift</th>
-			<th >Nomor Handphone</th>
-					<!--	<th >Tools</th>-->
+			<th style="color: white;">ID Karyawan</th>
+			<th style="color: white;">Nama Karyawan</th>
+			<th style="color: white;">Jadwal Shift</th>
+			<th style="color: white;">Nomor Handphone</th>
+			<th style="color: white;">Tools</th>-->
 			</tr>
 	
 		</thead>
@@ -57,18 +97,14 @@
 		 <tbody>
 		<tr > 
 			<td class="danger"><?php echo $row['id_karyawan'];?></td><!--namaatribut-->
+			<td class="primary"><?php echo $row['nama_kar'];?></td>
 			<td class="warning"><?php echo $row['jadwal_shift'];?></td>
 			<td class="success"><?php echo $row['nomor_hp'];?></td>	
-			<!--<a href="update.php?id=<?php echo $row['id_pelanggan']; ?>" >Update</a>
-
-			<a><a href="delete.php?id=<?php echo $row['id_pelanggan']; ?> ">Delete</a>
-
-			<a><a href="insert.php?id=<?php echo $row['id_pelanggan']; ?>">Insert</a>-->
+			<td>
+			<a href="updatekaryawan.php?id=<?php echo $row['id_karyawan']; ?>" >Update</a> ||
+			<a href="./proses/deletekaryawan.php?id=<?php echo $row['id_karyawan']; ?> ">Delete</a>
+			</td>
 			
-				
-			
-				
-		
 		</tr>
 			 </tbody>
 		<?php
@@ -76,5 +112,6 @@
 	}
 	?>
 	</table>
+	<a href="inputkaryawan.php"><button class="btn btn-danger">Tambah Karyawan</button></a>
 </body>
 </html>
