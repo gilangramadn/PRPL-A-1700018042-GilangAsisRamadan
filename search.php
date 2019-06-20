@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
 	</head>
@@ -31,7 +32,7 @@
 </div>
 </nav>
 <div class="container">
-<div class="jumbotron" style="margin: 0px;background: #8abce6;padding-top: 0px;">
+<div class="jumbotron" style="margin: 0px;background-color: rgba(245, 245, 245, 0.4);padding-top: 0px;">
   <hr style="border: 1px solid #fff">
   <h1 style="font-family: fantasy;
     text-transform: uppercase;
@@ -42,13 +43,13 @@
 	<table id="mytable" class="table table-bordred table-striped" >
 		 <thead>
 		<tr >
-			<th >Nomor PC</th>
-			<th >Nama Produk</th>
-			<th >ID Pelanggan</th>
-			<th >ID Karyawan</th>
-			<th > Date</th>
-			<th >Waktu Bermain</th>
-			<th >Harga</th>
+			<th style="color: white;">Nomor PC</th>
+			<th style="color: white;">Nama Produk</th>
+			<th style="color: white;">Nama Pelanggan</th>
+			<th style="color: white;">Nama Karyawan</th>
+			<th style="color: white;"> Date</th>
+			<th style="color: white;">Waktu Bermain</th>
+			<th style="color: white;">Harga</th>
 			</tr>
 	
 		</thead>
@@ -56,25 +57,25 @@
 include "koneksi.php";
 $key = $_POST['cari'];
 echo "Keyword pencarian = $key";
-$query = mysqli_query($koneksi,"SELECT prosesbayar.nomor_pc as nomor_pc, prosesbayar.nama_produk as nama_produk, prosesbayar.id_pelanggan as id_pelanggan, prosesbayar.id_karyawan as id_karyawan,prosesbayar.tanggal as tanggal, prosesbayar.waktu_pemakain as waktu_pemakain, prosesbayar.harga as harga FROM prosesbayar WHERE prosesbayar.nomor_pc LIKE '%$key%'");
-while ($row = mysqli_fetch_array($query)) {
+$query = mysqli_query($koneksi,"SELECT *,  pelanggan.nama as namapelanggan, karyawan.nama_kar as namakar  FROM prosesbayar 
+			join pelanggan on prosesbayar.id_pelanggan = pelanggan.id_pelanggan join karyawan on prosesbayar.id_karyawan = karyawan.id_karyawan WHERE prosesbayar.nomor_pc LIKE '%$key%'");
+while($row = mysqli_fetch_array($query)) {
 		?>
 	<tr > 
-			<td ><?php echo $row['nomor_pc'];?></td><!--namaatribut-->
-			<td ><?php echo $row['nama_produk'];?></td>
-			<td ><?php echo $row['id_pelanggan'];?></td>
-			<td ><?php echo $row['id_karyawan'];?></td>
-			<td ><?php echo $row['tanggal'];?></td>
-			<td ><?php echo $row['waktu_pemakain']." Jam";?></td>
-			<td ><?php echo "Rp."." ". $row['harga'];?></td>
+			<td class="success"><?php echo $row['nomor_pc'];?></td><!--namaatribut-->
+			<td class="info"><?php echo $row['nama_produk'];?></td>
+			<td class="danger"><?php echo $row['namapelanggan'];?></td>
+			<td class="info"><?php echo $row['namakar'];?></td>
+			<td class="warning"><?php echo $row['tanggal'];?></td>
+			<td class="danger"><?php echo $row['waktu_pemakain']." Jam";?></td>
+			<td class="active"><?php echo "Rp."." ". $row['harga'];?></td>
 			</tr>
 			 </tbody>
 				<?php
-
-	}
+}
 	?>
 	</table>
-	<a href="datatransaksi.php"><button class="btn btn-success">Kembali</button></a>
+	<a href="datatransaksi.php"><button class="btn btn-danger">Kembali</button></a>
 	</div>
 </center>
 </h1>
