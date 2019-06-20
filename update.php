@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
@@ -30,59 +31,94 @@
 				</tr>
 				<tr>
 
-					<td>Nomor PC</td>
-					<td>:</td>
-						<td><input type="text" class="form-control"  name="nomor_pc" value="<?php echo $row['nomor_pc']?>">
+					<td style="color: white;">Nomor PC</td>
+					<td style="color: white;">:</td>
+						<td>
+						<?php 
+						$result = mysqli_query($koneksi, "SELECT * FROM kategori_pc order by nomor_pc asc");
+						 ?>
+						<select class="form-control" name="nomor_pc">
+						<?php while ($data = mysqli_fetch_assoc($result)) {
+							if ($row['nomor_pc'] == $data['nomor_pc']) {?>
+								<option value="<?= $data['nomor_pc']?>" selected="selected"> <?= $data['nomor_pc']?></option>
+							<?php
+								}
+								else{ ?>
+								<option value="<?= $data['nomor_pc']?>"> <?= $data['nomor_pc']?></option>
+						<?php } 
+						}?>
 					</td>
 				</tr>
 				<tr>
-					<td>Nama Produk</td>
-					<td>:</td>
-						<td><select class="form-control" name="nama_produk" value="<?php echo$row['nama_produk']?>">
-					<option value="LG">LG</option>
-					<option value="Polytron">Polytron</option>
-					<option value="Samsung">Samsung</option>
+					<td style="color: white;">Nama Produk</td>
+					<td style="color: white;">:</td>
+						<td>
+							<?php 
+						$result = mysqli_query($koneksi, "SELECT * FROM produk_pc");
+						 ?>
+						<select class="form-control" name="nama_produk">
+						<?php while ($data = mysqli_fetch_assoc($result)) {
+							if ($row['nama_produk'] == $data['nama_produk']) {?>
+								<option value="<?= $data['nama_produk']?>" selected="selected"> <?= $data['nama_produk']?></option>
+							<?php
+								}
+								else{ ?>
+								<option value="<?= $data['nama_produk']?>"> <?= $data['nama_produk']?></option>
+						<?php } 
+						}?>
 				</select>
 					</td>
 				</tr>
 				<tr>
-					<td>ID Pelanggan</td>
-					<td>:</td>
-					<td> <select class="form-control" name="id_pelanggan" value="<?php echo$row['id_pelanggan']?>">
-					<option value="101">Gilang Asis Ramadan</option>
-					<option value="102">Binta Wahyu</option>
-					<option value="103">Dimas Aji</option>
-					<option value="104">Abi Fajar</option>
-					<option value="105">Lalu Arfi</option>
-					<option value="106">Dian Ramadhani</option>
-					<option value="107">Tyo Idzhar</option></select>
+					<td style="color: white;">Nama Pelanggan</td>
+					<td style="color: white;">:</td>
+					<td>
+					<?php 
+						$result = mysqli_query($koneksi, "SELECT * FROM pelanggan");
+						 ?>
+						<select class="form-control" name="id_pelanggan">
+						<?php while ($data = mysqli_fetch_assoc($result)) {
+							if ($row['id_pelanggan'] == $data['id_pelanggan']) {?>
+								<option value="<?= $data['id_pelanggan']?>" selected="selected"> <?= $data['nama']?></option>
+							<?php
+								}
+								else{ ?>
+								<option value="<?= $data['id_pelanggan']?>"> <?= $data['nama']?></option>
+						<?php } 
+						}?>
+					</select>
 					</td>
 				</tr>
 				<tr>
-					<td>ID Karyawan</td>
-					<td>:</td>
-						<td><select class="form-control" name="id_karyawan" value="<?php echo$row['id_karyawan']?> ">
-					<option value="001">001</option>
-					<option value="002">002</option>
-					<option value="003">003</option>
-					<option value="004">004</option>
-					<option value="005">005</option>
-					<option value="006">006</option>
-					<option value="007">007</option>
+					<td style="color: white;">Nama Karyawan</td>
+					<td style="color: white;">:</td>
+						<td><?php 
+						$result = mysqli_query($koneksi, "SELECT * FROM karyawan");
+						 ?>
+						<select class="form-control" name="id_karyawan">
+						<?php while ($data = mysqli_fetch_assoc($result)) {
+							if ($row['id_karyawan'] == $data['id_karyawan']) {?>
+								<option value="<?= $data['id_karyawan']?>" selected="selected"> <?= $data['nama_kar']?></option>
+							<?php
+								}
+								else{ ?>
+								<option value="<?= $data['id_karyawan']?>"> <?= $data['nama_kar']?></option>
+						<?php } 
+						}?>
 				</select>
 					</td>
 				</tr>
 				<tr>
 				<tr>
-					<td>Date</td>
-					<td> : </td>
+					<td style="color: white;">Date</td>
+					<td style="color: white;"> : </td>
 					<td><input type="date" class="form-control" name="tanggal" value="<?php 
 					echo $row['tanggal']?>"></td>
 				</tr>
 			</tr>
 				<tr>
-					<td>Waktu Bermain</td>
-					<td>:</td>
+					<td style="color: white;">Waktu Bermain</td>
+					<td style="color: white;">:</td>
 						<td><input type="text" class="form-control" name="waktu_pemakain" value="<?php echo $row['waktu_pemakain']?>">
 					</td>
 				</tr>
@@ -90,8 +126,8 @@
 
 					<tr>
 				<td></td><center>
-				<td colspan="2"><br><button type="submit" class="btn btn-success" value="simpan">Simpan Perubahan</button>
-					<a class="btn btn-success" href="datatransaksi.php">Kembali</a></td>
+				<td colspan="2"><br><button type="submit" class="btn btn-danger" value="simpan">Simpan Perubahan</button>
+					<a class="btn btn-danger" href="datatransaksi.php">Kembali</a></td>
 </center>
 				</tr>
 			</table>
