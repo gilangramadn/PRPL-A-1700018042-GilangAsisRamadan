@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
 </head>
@@ -30,8 +31,46 @@
 </nav>
 <body>
 <div class="container">
-	<div class="jumbotron" style="margin: 0px;background: #8abce6;padding-top: 0px;">
+	<div class="jumbotron" style="margin: 0px;background-color: rgba(245, 245, 245, 0.4);padding-top: 0px;">
   <hr style="border: 0px solid #fff">
+	<?php 
+		if(isset($_GET['pesan'])){
+			$pesan = $_GET['pesan'];
+    if($pesan == 'berhasil'){
+    	?>
+    	<div class="alert alert-success" role="alert">
+		  <b>Data Berhasil di Masukkan</b>
+		</div><?php 
+		    }
+		    else if($pesan == 'update'){
+		    	?>
+		    	<div class="alert alert-success" role="alert">
+		  <b>Data Berhasil di Update</b>
+		</div>
+		    	<?php
+		    }
+		    else if($pesan == 'hapus'){
+		    	?>
+		    	<div class="alert alert-danger" role="alert">
+		  <b>Data Berhasil di hapus</b>
+		</div>
+		    	<?php
+		    }else if($pesan == 'gagal'){
+		    	?>
+		    	<div class="alert alert-danger" role="alert">
+		  <b>Produk sedang digunakan, tidak bisa mengubah nama</b>
+		</div>
+		    	<?php
+		    }else if($pesan == 'gagalhapus'){
+		    	?>
+		    	<div class="alert alert-danger" role="alert">
+		  <b>Produk sedang digunakan, tidak bisa dihapus</b>
+		</div>
+		    	<?php
+		    }
+
+		}
+		    ?>
   <h1 style="font-family: fantasy;
     text-transform: uppercase;
     -webkit-text-stroke: 2px #ffffff;">Data Kategori</h1>
@@ -45,9 +84,9 @@
 	<table id="mytable" class="table table-bordred table-striped" >
 		 <thead>
 		<tr >
-			<th >Nomor PC</th>
-			<th >Kelengkapan PC</th>	
-			<!--<th >Tools</th>-->
+			<th style="color: white;">Nomor PC</th>
+			<th style="color: white;">Kelengkapan PC</th>	
+			<th style="color: white;">Tools</th>
 			</tr>
 	
 		</thead>
@@ -61,12 +100,9 @@
 		<tr > 
 			<td class="info"><?php echo $row['nomor_pc'];?></td><!--namaatribut-->
 			<td class="danger"><?php echo $row['kelengkapan_pc'];?></td>
-			<!--<td >
-			<a href="update.php?id=<?php echo $row['nomor_pc']; ?>" >Update</a>
-
-			</a><a href="delete.php?id=<?php echo $row['nomor_pc']; ?> ">Delete</a>
-
-			<a href="insert.php?id=<?php echo $row['nomor_pc']; ?>">Insert</a>-->
+			<td >
+			<a href="updatebarang.php?id=<?php echo $row['nomor_pc']; ?>" >Update</a> || 
+			<a href="deletebarang.php?id=<?php echo $row['nomor_pc']; ?> ">Delete</a>
 		</tr>
 			 </tbody>
 		<?php
@@ -77,6 +113,7 @@
 </center>
 </center>
 	</table>
+	<center><a href="inputbarang.php"><button class="btn btn-danger">Tambah Barang</button></a></center>
 </div>
 </div>
 </div>
